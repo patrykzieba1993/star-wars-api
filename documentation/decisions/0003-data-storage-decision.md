@@ -26,3 +26,6 @@ Considering the current data structure, the best choice at this point is a docum
 In the future, once the structure is more complicated, a relational database seems to be a sensible choice. Especially Postgres that is a hybrid database where documents might be stored in JSONB columns as well as key-value pairs.
 
 At this point, the decision is to use `MongoDB` database.
+
+UPDATE:
+`Character` data schema is extended with unique `id` that could be used as a `key` in the key-value database. However, it still makes sense to use document database so the final decision is to keep `MongoDB`.
