@@ -10,95 +10,156 @@ import {
 } from '../../mocks/data';
 
 describe('characters/repository/inMemory', () => {
-  let collection: Array<Character> = [];
   let charactersInMemoryRepository: CharactersRepository;
 
   beforeEach(() => {
-    collection = [
-      characterFirst,
-      characterSecond,
-      characterThird,
-    ];
-
-    charactersInMemoryRepository = createCharactersInMemoryRepository(collection);
+    charactersInMemoryRepository = createCharactersInMemoryRepository();
   });
 
-  it('adds a character to the collection', async () => {
-    expect.assertions(2);
+  describe('create', () => {
+    it('adds a character to the collection', async () => {
+      expect.assertions(2);
 
-    const characterCreated = await charactersInMemoryRepository.create(characterFourth);
+      const characterCreated = await charactersInMemoryRepository.create({ ...characterFirst });
 
-    const expectedCollection = [
-      ...collection,
-      characterFourth,
-    ];
+      const expectedCollection = [
+        characterFirst,
+      ];
 
-    expect(characterCreated).toEqual(characterFourth);
-    expect(collection).toEqual(expectedCollection);
+      const currentCollection = await charactersInMemoryRepository.getAll();
+
+      expect(characterCreated).toEqual(characterFirst);
+      expect(currentCollection).toEqual(expectedCollection);
+    });
   });
 
-  it('updates a character in the collection', async () => {
-    expect.assertions(2);
+  describe('update', () => {
+    it('updates a character in the collection', async () => {
+      expect.assertions(2);
 
-    const updatedName = `${characterSecond.name} - edited`;
+      await charactersInMemoryRepository.create(characterFirst);
 
-    const characterUpdated = await charactersInMemoryRepository.update({
-      name: updatedName,
+      const updatedName = `${characterFirst.name} - edited`;
+
+      const expectedCharacter: Character = {
+        ...characterFirst,
+        name: updatedName,
+      };
+
+      const id = characterFirst.id;
+
+      const toUpdate = {
+        name: updatedName,
+      };
+
+      const characterUpdated = await charactersInMemoryRepository.update(id, toUpdate);
+
+      const expectedCollection = [
+        expectedCharacter,
+      ];
+
+      const currentCollection = await charactersInMemoryRepository.getAll();
+
+      expect(characterUpdated).toEqual(characterUpdated);
+      expect(currentCollection).toEqual(expectedCollection);
     });
 
-    const expectedCharacter: Character = {
-      ...characterSecond,
-      name: updatedName,
-    };
+    it('returns null when a character does not exist', async () => {
+      expect.assertions(1);
 
-    const expectedCollection = [
-      characterFirst,
-      expectedCharacter,
-      characterThird,
-    ];
+      const id = characterFirst.id;
 
-    expect(characterUpdated).toEqual(characterUpdated);
-    expect(collection).toEqual(expectedCollection);
+      const toUpdate = {};
+
+      const characterUpdated = await charactersInMemoryRepository.update(id, toUpdate);
+
+      expect(characterUpdated).toEqual(null);
+    });
   });
 
-  it('removes a character from the collection', async () => {
-    expect.assertions(2);
+  describe('remove', () => {
+    it('removes a character from the collection', async () => {
+      expect.assertions(2);
 
-    const characterRemoved = await charactersInMemoryRepository.remove(characterSecond.id);
+      await charactersInMemoryRepository.create(characterFirst);
 
-    const expectedCollection = [
-      characterFirst,
-      characterThird,
-    ];
+      const characterRemoved = await charactersInMemoryRepository.remove(characterFirst.id);
 
-    expect(characterRemoved).toEqual(characterSecond);
-    expect(collection).toEqual(expectedCollection);
+      const currentCollection = await charactersInMemoryRepository.getAll();
+
+      expect(characterRemoved).toEqual(characterFirst);
+      expect(currentCollection).toEqual([]);
+    });
+
+    it('returns null when a character does not exist', async () => {
+      expect.assertions(1);
+
+      const id = characterFirst.id;
+
+      const characterUpdated = await charactersInMemoryRepository.remove(id);
+
+      expect(characterUpdated).toEqual(null);
+    });
   });
 
-  it('returns a character from the collection', async () => {
-    expect.assertions(1);
+  describe('getById', () => {
+    it('returns a character from the collection', async () => {
+      expect.assertions(1);
 
-    const characterFound = await charactersInMemoryRepository.getById(characterSecond.id);
+      await charactersInMemoryRepository.create(characterFirst);
 
-    expect(characterFound).toEqual(characterSecond);
+      const characterFound = await charactersInMemoryRepository.getById(characterFirst.id);
+
+      expect(characterFound).toEqual(characterFirst);
+    });
+
+    it('returns null when a character does not exist', async () => {
+      expect.assertions(1);
+
+      const id = characterFirst.id;
+
+      const characterUpdated = await charactersInMemoryRepository.getById(id);
+
+      expect(characterUpdated).toEqual(null);
+    });
   });
 
-  it('returns all characters from the collection', async () => {
-    expect.assertions(1);
+  describe('getAll', () => {
+    it('returns all characters from the collection', async () => {
+      expect.assertions(1);
 
-    const charactersFound = await charactersInMemoryRepository.getAll();
+      await charactersInMemoryRepository.create(characterFirst);
+      await charactersInMemoryRepository.create(characterSecond);
 
-    expect(charactersFound).toEqual(collection);
-  });
+      const charactersFound = await charactersInMemoryRepository.getAll();
 
-  it('returns characters from the collection specified by pagination', async () => {
-    expect.assertions(1);
+      const expectedCollection = [
+        characterFirst,
+        characterSecond,
+      ];
 
-    const offset = 1;
-    const limit = 1;
+      expect(charactersFound).toEqual(expectedCollection);
+    });
 
-    const charactersFound = await charactersInMemoryRepository.getAll(offset, limit);
+    it('returns characters from the collection specified by pagination', async () => {
+      expect.assertions(1);
 
-    expect(charactersFound).toEqual([characterSecond]);
+      await charactersInMemoryRepository.create(characterFirst);
+      await charactersInMemoryRepository.create(characterSecond);
+      await charactersInMemoryRepository.create(characterThird);
+      await charactersInMemoryRepository.create(characterFourth);
+
+      const offset = 1;
+      const limit = 2;
+
+      const charactersFound = await charactersInMemoryRepository.getAll(offset, limit);
+
+      const expectedCollection = [
+        characterSecond,
+        characterThird,
+      ];
+
+      expect(charactersFound).toEqual(expectedCollection);
+    });
   });
 });

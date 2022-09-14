@@ -1,25 +1,64 @@
 import { Character, CharactersRepository } from '../character';
 
-// collection parameter is mutable intentionally because it simulates a permanent data storage
-const createCharactersInMemoryRepository = (collection: Array<Character> = []): CharactersRepository => {
+const createCharactersInMemoryRepository = (): CharactersRepository => {
+  let collection: Array<Character> = [];
+
   const getAll = (offset?: number, limit?: number) => {
-    return Promise.resolve(collection);
+    let collectionToReturn = [...collection];
+
+    if (offset) {
+      collectionToReturn = collectionToReturn.slice(offset);
+    }
+
+    if (limit) {
+      collectionToReturn = collectionToReturn.slice(0, limit);
+    }
+
+    return Promise.resolve(collectionToReturn);
   };
 
   const getById = (id: string) => {
-    return Promise.resolve(collection[0]);
+    const characterFound = collection.find(character => character.id === id);
+
+    if (!characterFound) {
+      return Promise.resolve(null);
+    }
+
+    return Promise.resolve(characterFound);
   };
 
   const create = (character: Character) => {
-    return Promise.resolve(collection[0]);
+    collection.push(character);
+
+    return Promise.resolve(character);
   };
 
-  const update = (character: Partial<Character>) => {
-    return Promise.resolve(collection[0]);
+  const update = (id: string, character: Partial<Character>) => {
+    const indexOfCharacter = collection.findIndex(
+      (currentCharacter) => currentCharacter.id === id,
+    );
+
+    if (indexOfCharacter === -1) {
+      return Promise.resolve(null);
+    }
+
+    collection[indexOfCharacter] = { ...collection[indexOfCharacter], ...character };
+
+    const characterUpdated = collection[indexOfCharacter];
+
+    return Promise.resolve(characterUpdated);
   };
 
   const remove = (id: string) => {
-    return Promise.resolve(collection[0]);
+    const characterRemoved = collection.find(character => character.id === id);
+
+    if (!characterRemoved) {
+      return Promise.resolve(null);
+    }
+
+    collection = collection.filter(character => character.id !== id);
+
+    return Promise.resolve(characterRemoved);
   };
 
   return {
