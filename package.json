@@ -1,0 +1,9 @@
+{
+  "name": "star-wars-api",
+  "version": "1.0.0",
+  "description": "Star Wars HTTP API",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serverless-http": "^2.7.0"
+  }
+}
