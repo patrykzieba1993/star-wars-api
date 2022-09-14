@@ -1,11 +1,7 @@
 const serverless = require("serverless-http");
-const express = require("express");
-const app = express();
 
-app.get("/", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello Star Wars!",
-  });
-});
+const { createApplication } = require('./dist/application');
 
-module.exports.handler = serverless(app);
+const application = createApplication();
+
+module.exports.handler = serverless(application);

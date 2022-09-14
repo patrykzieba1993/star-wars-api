@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "allowJs": false,
+    "strict": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", ".serverless", "dist", "./src/test/", "**/*.test.ts"],
+}
