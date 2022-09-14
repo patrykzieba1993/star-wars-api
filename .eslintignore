@@ -1,0 +1,13 @@
+.idea
+.serverless
+dist
+node_modules
+.eslintrc
+.nvmrc
+handler.js
+package.json
+package-lock.json
+REAMDE.md
+serverless.yml
+tsconfig.build.json
+tsconfig.json
