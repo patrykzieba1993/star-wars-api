@@ -1,9 +1,12 @@
 import express from 'express';
 
+import { charactersRoutes } from './characters';
+
 const createApplication = () => {
   const app = express();
 
-  app.get('/', (req, res) => res.json({ message: 'Hello Star Wars!!!' }));
+  app.use(express.json());
+  app.use(charactersRoutes());
 
   return app;
 };

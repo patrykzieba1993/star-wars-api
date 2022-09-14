@@ -1,6 +1,7 @@
 .idea
 .serverless
 dist
+documentation
 node_modules
 .eslintrc
 .nvmrc
