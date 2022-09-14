@@ -26,7 +26,7 @@ const createCharactersRoutes = (charactersController: CharactersController) => {
 
   router.delete(
     '/characters/:id',
-    charactersController.deleteCharacter,
+    charactersController.removeCharacter,
   );
 
   return router;

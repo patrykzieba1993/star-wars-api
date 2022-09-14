@@ -1,8 +1,8 @@
 import { Controller } from '../shared/types';
-import { withErrorHandling } from '../shared/helpers';
+import { withErrorHandling } from '../shared/functions';
 
 type CharactersController = Controller<[
-  'getCharacter', 'getCharacters', 'createCharacter', 'updateCharacter', 'deleteCharacter',
+  'getCharacter', 'getCharacters', 'createCharacter', 'updateCharacter', 'removeCharacter',
 ]>;
 
 const createCharactersController = (): CharactersController => {
@@ -38,7 +38,7 @@ const createCharactersController = (): CharactersController => {
     });
   });
 
-  const deleteCharacter = withErrorHandling(async (request, response) => {
+  const removeCharacter = withErrorHandling(async (request, response) => {
     const { id } = request.params;
 
     response.json({
@@ -51,7 +51,7 @@ const createCharactersController = (): CharactersController => {
     getCharacter,
     createCharacter,
     updateCharacter,
-    deleteCharacter,
+    removeCharacter,
   };
 };
 
