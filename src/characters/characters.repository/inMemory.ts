@@ -1,4 +1,4 @@
-import { Character, CharactersRepository } from "../character";
+import { Character, CharactersRepository } from '../character';
 
 // collection parameter is mutable intentionally because it simulates a permanent data storage
 const createCharactersInMemoryRepository = (collection: Array<Character> = []): CharactersRepository => {
@@ -28,7 +28,7 @@ const createCharactersInMemoryRepository = (collection: Array<Character> = []): 
     create,
     update,
     remove,
-  }
+  };
 };
 
 export { createCharactersInMemoryRepository };

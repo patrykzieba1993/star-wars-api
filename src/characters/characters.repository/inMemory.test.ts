@@ -1,4 +1,4 @@
-import {Character, CharactersRepository} from '../character';
+import { Character, CharactersRepository } from '../character';
 
 import { createCharactersInMemoryRepository } from './inMemory';
 
