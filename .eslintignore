@@ -5,6 +5,7 @@ node_modules
 .eslintrc
 .nvmrc
 handler.js
+jest.config.js
 package.json
 package-lock.json
 REAMDE.md
