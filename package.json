@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Star Wars HTTP API",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build tsconfig.build.json",
     "dev": "nodemon -e ts --exec \"npm run build && npm start\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^4.9.1",
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
