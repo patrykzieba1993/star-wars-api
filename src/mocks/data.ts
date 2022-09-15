@@ -1,9 +1,14 @@
-import { Character } from '../characters/character';
+import { Character, CharacterDTO } from '../characters/character';
+
+const characterDTOFirst: CharacterDTO = {
+  name: 'Luke Sywalker',
+  planet: 'Alderaan',
+  episodes: ['NEWHOPE', 'EMPIRE', 'JEDI'],
+};
 
 const characterFirst: Character = {
+  ...characterDTOFirst,
   id: '4203749a-54b1-4c59-a794-fc7ed301f4a3',
-  name: 'Luke Sywalker',
-  episodes: ['NEWHOPE', 'EMPIRE', 'JEDI'],
 };
 
 const characterSecond: Character = {
@@ -44,6 +49,7 @@ const characterSeventh: Character = {
 };
 
 export {
+  characterDTOFirst,
   characterFirst,
   characterSecond,
   characterThird,

@@ -1,8 +1,11 @@
-type Character = {
-  id: string,
+type CharacterDTO = {
   name: string,
   episodes: Array<'NEWHOPE' | 'EMPIRE' | 'JEDI'>,
   planet?: string,
+};
+
+type Character = CharacterDTO & {
+  id: string,
 };
 
 interface CharactersRepository {
@@ -13,4 +16,4 @@ interface CharactersRepository {
   remove: (id: string) => Promise<Character | null>,
 }
 
-export { Character, CharactersRepository };
+export { CharacterDTO, Character, CharactersRepository };
