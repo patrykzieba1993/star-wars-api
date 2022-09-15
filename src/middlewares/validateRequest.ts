@@ -2,7 +2,6 @@ import { Schema } from 'joi';
 import { Request, Response, NextFunction } from 'express';
 
 import { HttpRequestValidationError } from '../errors/HttpRequestValidationError';
-import { ApplicationError } from '../errors/ApplicationError';
 
 enum ValidationKeys {
   body = 'body',
@@ -13,21 +12,21 @@ enum ValidationKeys {
 const createValidateRequest = (
   schema: Schema,
   key: string,
-) => (req: Request, res: Response, next: NextFunction) => {
+) => (request: Request, response: Response, next: NextFunction) => {
   let value;
 
   switch (key) {
     case ValidationKeys.body:
-      value = req.body;
+      value = request.body;
       break;
     case ValidationKeys.params:
-      value = req.params;
+      value = request.params;
       break;
     case ValidationKeys.queryParams:
-      value = req.query;
+      value = request.query;
       break;
     default:
-      throw new ApplicationError(`Unrecognised validation key ${key}`);
+      throw new Error(`Unrecognised validation key ${key}`);
   }
 
   const validationResult = schema.validate(value);

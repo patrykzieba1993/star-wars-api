@@ -9,4 +9,8 @@ class ResourceNotFoundError extends Error {
   }
 }
 
-export { ResourceNotFoundError };
+const isResourceNotFoundError = (error: Error): error is ResourceNotFoundError => {
+  return error.name === ErrorTypes.ResourceNotFoundError;
+};
+
+export { ResourceNotFoundError, isResourceNotFoundError };

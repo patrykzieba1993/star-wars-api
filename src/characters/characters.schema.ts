@@ -12,9 +12,9 @@ const Planet = Joi.string();
 const Episodes = Joi.array()
   .items(
     Joi.string()
-      .valid(...config.characters.allowedEpisodes)
+      .valid(...config.characters.allowedEpisodes),
   )
-  .min(1)
+  .min(1);
 
 const CreateCharacterBody = Joi.object({
   name: Name.required(),
