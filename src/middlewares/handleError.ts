@@ -7,8 +7,6 @@ import {
 
 const handleError = (error: Error, request: Request, response: Response, next: NextFunction) => {
   if (error) {
-    console.error(error.message);
-
     let message = 'Internal server error';
     let code = 500;
 

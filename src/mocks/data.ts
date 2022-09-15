@@ -11,23 +11,35 @@ const characterFirst: Character = {
   id: '4203749a-54b1-4c59-a794-fc7ed301f4a3',
 };
 
-const characterSecond: Character = {
-  id: '32dbb3b5-6729-4790-b71e-1a787af221cd',
+const characterDTOSecond: CharacterDTO = {
   name: 'Darth Vader',
   episodes: ['NEWHOPE', 'EMPIRE', 'JEDI'],
 };
 
-const characterThird: Character = {
-  id: '993c0cfc-bbd7-4c85-baef-bb09a854303f',
+const characterSecond: Character = {
+  ...characterDTOSecond,
+  id: '32dbb3b5-6729-4790-b71e-1a787af221cd',
+};
+
+const characterDTOThird: CharacterDTO = {
   name: 'Han Solo',
   episodes: ['NEWHOPE', 'EMPIRE', 'JEDI'],
 };
 
-const characterFourth: Character = {
-  id: 'c47acfd9-093d-4588-b31d-7a19e0b88922',
+const characterThird: Character = {
+  ...characterDTOThird,
+  id: '993c0cfc-bbd7-4c85-baef-bb09a854303f',
+};
+
+const characterDTOFourth: CharacterDTO = {
   name: 'Leia Organa',
   episodes: ['NEWHOPE', 'EMPIRE', 'JEDI'],
-  'planet': 'Alderaan',
+  planet: 'Alderaan',
+};
+
+const characterFourth: Character = {
+  ...characterDTOFourth,
+  id: 'c47acfd9-093d-4588-b31d-7a19e0b88922',
 };
 
 const characterFifth: Character = {
@@ -51,8 +63,11 @@ const characterSeventh: Character = {
 export {
   characterDTOFirst,
   characterFirst,
+  characterDTOSecond,
   characterSecond,
+  characterDTOThird,
   characterThird,
+  characterDTOFourth,
   characterFourth,
   characterFifth,
   characterSixth,
