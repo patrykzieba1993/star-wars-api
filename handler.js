@@ -1,7 +1,11 @@
 const serverless = require("serverless-http");
 
-const { createApplication } = require('./dist/application');
+const { runApplication } = require('./dist');
 
-const application = createApplication();
+module.exports.handler = async (event, context, callback) => {
+  const application = await runApplication();
 
-module.exports.handler = serverless(application);
+  const proxy = await serverless(application);
+
+  return proxy(event, context, callback);
+};
