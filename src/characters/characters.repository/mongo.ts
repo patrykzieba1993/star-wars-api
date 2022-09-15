@@ -1,13 +1,14 @@
 import { Db } from 'mongodb';
 
-import { Character, CharactersRepository } from '../character';
+import { Character, CharacterDTO, CharactersRepository } from '../character';
+import { config } from '../../config';
 
 const findOptions = { projection: { _id: 0 } };
 
 const defaults = {
-  offset: 0,
-  limit: 100,
-  collectionName: 'characters',
+  offset: config.characters.defaultOffset,
+  limit: config.characters.defaultLimit,
+  collectionName: config.mongoDb.collectionName,
 };
 
 const createCharactersMongoRepository = (database: Db): CharactersRepository => {
@@ -33,8 +34,8 @@ const createCharactersMongoRepository = (database: Db): CharactersRepository => 
     return character;
   };
 
-  const update = async (id: string, character: Partial<Character>) => {
-    await collection.updateOne({ id }, { $set: { ...character } });
+  const update = async (id: string, characterDTO: Partial<CharacterDTO>) => {
+    await collection.updateOne({ id }, { $set: { ...characterDTO } });
 
     return getById(id);
   };

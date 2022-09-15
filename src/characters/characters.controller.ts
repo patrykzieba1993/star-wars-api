@@ -1,52 +1,52 @@
 import { Controller } from '../shared/types';
-import { CharactersRepository } from './character';
+import { CharactersFacade } from './characters.facade';
 import { withErrorHandling } from '../shared/functions';
 
 type CharactersController = Controller<[
   'getCharacter', 'getCharacters', 'createCharacter', 'updateCharacter', 'removeCharacter',
 ]>;
 
-const createCharactersController = (charactersRepository: CharactersRepository): CharactersController => {
+const createCharactersController = (charactersFacade: CharactersFacade): CharactersController => {
   const getCharacters = withErrorHandling(async (request, response) => {
     const offset = parseInt(request.query.offset as string, 10);
     const limit = parseInt(request.query.limit as string, 10);
 
-    const characters = await charactersRepository.getAll(offset, limit);
+    const charactersFound = await charactersFacade.getAll(offset, limit);
 
-    response.json(characters);
+    response.json({ characters: charactersFound });
   });
 
   const getCharacter = withErrorHandling(async (request, response) => {
     const { id } = request.params;
 
-    const character = await charactersRepository.getById(id);
+    const characterFound = await charactersFacade.getById(id);
 
-    response.json(character);
+    response.json({ character: characterFound });
   });
 
   const createCharacter = withErrorHandling(async (request, response) => {
     const { body } = request;
 
-    const characterCreated = await charactersRepository.create(body);
+    const characterCreated = await charactersFacade.create(body);
 
-    response.status(201).json(characterCreated);
+    response.status(201).json({ character: characterCreated });
   });
 
   const updateCharacter = withErrorHandling(async (request, response) => {
     const { id } = request.params;
     const { body } = request;
 
-    const characterUpdated = await charactersRepository.update(id, body);
+    const characterUpdated = await charactersFacade.update(id, body);
 
-    response.json(characterUpdated);
+    response.json({ character: characterUpdated });
   });
 
   const removeCharacter = withErrorHandling(async (request, response) => {
     const { id } = request.params;
 
-    const characterRemoved = await charactersRepository.remove(id);
+    const characterRemoved = await charactersFacade.remove(id);
 
-    response.json(characterRemoved);
+    response.json({ character: characterRemoved });
   });
 
   return {
