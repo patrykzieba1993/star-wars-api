@@ -10,8 +10,6 @@ const handleError = (error: Error, request: Request, response: Response, next: N
     let message = 'Internal server error';
     let code = 500;
 
-    console.log(error);
-
     if (isHttpRequestValidationError(error)) {
       code = 400;
       message = error.message;

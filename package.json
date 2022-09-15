@@ -4,6 +4,7 @@
   "description": "Star Wars HTTP API",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
+    "deploy": "npm run build && sls deploy",
     "dev": "nodemon -e ts --exec \"npm run build && npm start\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

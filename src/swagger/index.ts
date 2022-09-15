@@ -1,6 +1,6 @@
-import express, { Router } from "express";
-import path from "path";
-import swaggerJSDoc from "swagger-jsdoc";
+import express, { Router } from 'express';
+import path from 'path';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 import { config } from '../config';
 
@@ -10,7 +10,7 @@ const swagger = () => {
   const router = Router();
 
   const options = {
-    failOnErrors: false,
+    failOnErrors: true,
     definition: {
       info: {
         title: 'Star Wars API',
@@ -20,7 +20,7 @@ const swagger = () => {
       basePath: '/',
     },
     apis: [
-      path.join(__dirname, '/characters.routes.js'),
+      path.join(__dirname, '../**/*.docs.js'),
     ],
   };
 

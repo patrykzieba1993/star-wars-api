@@ -1,7 +1,7 @@
 import express from 'express';
 import { Db } from 'mongodb';
 import consolidate from 'consolidate';
-import path from "path";
+import path from 'path';
 
 import { charactersRoutes } from './characters';
 import { handleError } from './middlewares';
@@ -17,6 +17,7 @@ const createApplication = (database?: Db) => {
   app.use(swagger());
   app.use(charactersRoutes(database));
   app.use(handleError);
+  app.get('/', (request, response) => response.render('welcome-page'));
 
   return app;
 };

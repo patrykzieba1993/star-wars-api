@@ -3,6 +3,7 @@
 dist
 documentation
 node_modules
+views
 .eslintrc
 .nvmrc
 handler.js
