@@ -2,7 +2,7 @@
 import request from 'supertest';
 import { Express } from 'express';
 
-import { CharacterDTO } from '../../characters/character';
+import { CharacterDTO } from '../../../characters/character';
 
 const createCharacter = (application: Express, characterDTO: CharacterDTO) => request(application)
   .post('/characters')

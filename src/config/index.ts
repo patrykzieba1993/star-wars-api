@@ -1,7 +1,8 @@
 const config = {
   host: process.env.HOST as string,
-  mongoDb: {
-    connectionString: process.env.MONGO_DB_CONNECTION_STRING as string,
+  database: {
+    connectionString: process.env.DB_CONNECTION_STRING as string,
+    databaseName: 'characters',
     collectionName: 'characters',
   },
   characters: {

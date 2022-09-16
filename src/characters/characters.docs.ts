@@ -6,7 +6,7 @@
  *       id:
  *         description: Character's unique id.
  *         type: string
- *         example: 2c655a62-d037-44c5-b26e-9159f874084c
+ *         example: 400ee54e-cb86-4e4a-bf82-4d4f39446136
  *       name:
  *         description: Character's name.
  *         type: string
@@ -35,14 +35,14 @@
  *       - in: query
  *         name: offset
  *         required: false
- *         description: Characters offset.
+ *         description: Characters offset (default - 0).
  *         type: number
  *         example: 1
  *         default: 0
  *       - in: query
  *         name: limit
  *         required: false
- *         description: Characters limit.
+ *         description: Characters limit (default - 100).
  *         type: number
  *         example: 1
  *         default: 100

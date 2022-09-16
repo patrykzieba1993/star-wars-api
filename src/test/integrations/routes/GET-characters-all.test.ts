@@ -1,15 +1,15 @@
 import request from 'supertest';
 
-import { createApplication } from '../../application';
+import { createTestApplication } from '../testApplication';
 import {
   characterDTOFirst,
   characterDTOSecond,
   characterDTOThird,
   characterDTOFourth,
-} from '../../mocks/data';
+} from '../../../mocks/data';
 import { createCharacter } from '../shared';
 
-const application = createApplication();
+const application = createTestApplication();
 
 describe('GET /characters endpoint', () => {
   beforeAll(async () => {

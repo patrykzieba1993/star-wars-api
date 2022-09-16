@@ -8,7 +8,7 @@ const findOptions = { projection: { _id: 0 } };
 const defaults = {
   offset: config.characters.defaultOffset,
   limit: config.characters.defaultLimit,
-  collectionName: config.mongoDb.collectionName,
+  collectionName: config.database.collectionName,
 };
 
 const createCharactersMongoRepository = (database: Db): CharactersRepository => {

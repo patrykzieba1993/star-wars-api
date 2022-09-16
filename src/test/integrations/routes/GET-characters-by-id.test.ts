@@ -1,11 +1,11 @@
 import request from 'supertest';
 
-import { createApplication } from '../../application';
-import { characterDTOFirst } from '../../mocks/data';
-import { Character } from '../../characters/character';
+import { createTestApplication } from '../testApplication';
+import { characterDTOFirst } from '../../../mocks/data';
+import { Character } from '../../../characters/character';
 import { createCharacter } from '../shared';
 
-const application = createApplication();
+const application = createTestApplication();
 
 describe('GET /characters/:id endpoint', () => {
   it('returns requested character', async () => {

@@ -1,8 +1,8 @@
-import { createApplication } from '../../application';
-import { characterDTOFirst } from '../../mocks/data';
+import { createTestApplication } from '../testApplication';
+import { characterDTOFirst } from '../../../mocks/data';
 import { createCharacter } from '../shared';
 
-const application = createApplication();
+const application = createTestApplication();
 
 describe('POST /characters endpoint', () => {
   it('returns newly created character', async () => {

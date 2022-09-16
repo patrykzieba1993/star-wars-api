@@ -1,9 +1,9 @@
 import request from 'supertest';
 
-import { createApplication } from '../../application';
-import { characterDTOFirst, characterSecond } from '../../mocks/data';
+import { createTestApplication } from '../testApplication';
+import { characterDTOFirst, characterSecond } from '../../../mocks/data';
 
-const application = createApplication();
+const application = createTestApplication();
 
 describe('characters not found', () => {
   beforeAll(async () => {
